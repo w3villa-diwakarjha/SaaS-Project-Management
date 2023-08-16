@@ -1,0 +1,38 @@
+<h1>Projects</h1>
+
+<% if @projects.size > 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Details</th>
+        <th>Expected Completion Date</th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td class="align-middle"><%= link_to project.title, tenant_project_path(project, tenant_id: @tenant.id), class: 'main-link' %></td>
+          <td class="align-middle"><%= project.details %></td>
+          <td class="align-middle"><%= project.expected_completion_date %></td>
+          <td>
+            <div class="d-flex">
+              <%= link_to 'Edit', edit_tenant_project_path(project, tenant_id: @tenant.id), class: 'btn btn-outline-primary btn-xs me-2' %>
+              <%= link_to 'Edit Users', users_tenant_project_path(project, tenant_id: @tenant.id), class: 'btn btn-outline-primary btn-xs me-2' %>
+              <%= button_to "Destroy", tenant_project_path(project, tenant_id: @tenant.id), method: :delete, class:"btn btn-danger btn-xs" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="lead">You don't have any projects</p>
+<% end %>
+
+<% if (@tenant.can_create_project?) %>
+  <%= link_to "New project", new_tenant_project_path(tenant_id: current_tenant.id), class: "btn btn-primary" %>
+<% else %>
+  <%= link_to "New project", new_tenant_project_path(tenant_id: current_tenant.id), class: "btn btn-secondary disabled" %>
+<% end %>

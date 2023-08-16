@@ -1,0 +1,37 @@
+<%= form_with(model: [@tenant, @project], html: {class: "form-horizontal project"}) do |form| %>
+    <% if project.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+  
+        <ul>
+          <% project.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="control-group mb-3">
+      <%= form.label :title, style: "display: block", class: "control-label" %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+  
+    <div class="control-group mb-3">
+      <%= form.label :details, style: "display: block", class: "control-label"  %>
+      <%= form.text_field :details, class: "form-control"  %>
+    </div>
+  
+    <div class="control-group mb-3">
+      <%= form.label :expected_completion_date, style: "display: block", class: "control-label"  %>
+      <%= form.date_field :expected_completion_date, class: "form-control"  %>
+    </div>
+  
+    <%= form.hidden_field :tenant_id, value: params[:tenant_id], class: 'form-control' %>
+    
+    <div>
+      <%= form.submit nil, class: 'btn btn-primary' %>
+      <%= link_to t('.cancel', default: t("helpers.links.cancel")), root_path, class: 'btn btn-outline-primary' %>
+    </div>
+  
+    
+  <% end %>

@@ -1,0 +1,36 @@
+<%# <%= render @project %> 
+<div>
+<%# <div id="<%= dom_id project %>
+
+  <h3><%= @project.title %></h3>
+  <h3><small>Organization - <%= tenant_name @project.tenant_id %></small></h3>
+
+  <table class="mb-2">
+    <tbody>
+      <tr>
+        <td><strong>Title:</strong></td>
+        <td><%= @project.title %></td>
+      </tr>
+      <tr>
+        <td><strong>Details:</strong></td>
+        <td><%= @project.details %></td>
+      </tr>
+      <tr>
+        <td><strong>Expected completion date:</strong></td>
+        <td><%= @project.expected_completion_date %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+  <h3>Artifacts</h3>
+  <%= render 'artifacts/list', artifacts: @project.artifacts %>
+</p>
+
+<div class="d-flex">
+    <%= link_to "< Back to Organization Home", root_path, class:"btn btn-outline-primary me-2" %>
+    <%= link_to "Edit this project", edit_tenant_project_path(project: @project, tenant: @project.tenant_id), class:"btn btn-outline-primary me-2" %>
+    <%= link_to "Edit Project Users", users_tenant_project_path(tenant_id: @project.tenant_id, id: @project.id), class: "btn btn-outline-primary me-2" %>
+    <%= button_to "Destroy this project", tenant_project_path(@project, tenant_id: @project.tenant_id), method: :delete, class:"btn btn-outline-danger" %>
+</div>

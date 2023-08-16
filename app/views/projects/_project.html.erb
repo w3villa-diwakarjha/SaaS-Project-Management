@@ -1,0 +1,22 @@
+<div id="<%= dom_id project %>">
+
+  <h3><%= project.title %></h3>
+  <h3><small>Organization - <%= tenant_name project.tenant_id %></small></h3>
+
+  <table class="mb-2">
+    <tbody>
+      <tr>
+        <td><strong>Title:</strong></td>
+        <td><%= project.title %></td>
+      </tr>
+      <tr>
+        <td><strong>Details:</strong></td>
+        <td><%= project.details %></td>
+      </tr>
+      <tr>
+        <td><strong>Expected completion date:</strong></td>
+        <td><%= project.expected_completion_date %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
